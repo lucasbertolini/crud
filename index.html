@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexum - CRUD</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+<body class="bg-light">
+
+    <div class="container">
+        <div class="card border-logo mt-5">
+            <h6 class="card-header ">Cadastro de clientes</h6>
+            <div class="card-body">
+                <input type="hidden" name="codigo_cliente" value="0" id="codigo_cliente">
+                <div class="form-group">
+                    <button class="btn btn-success" data-action="abrir_modal"><i class="fa-solid fa-plus fa-lg"></i></button>
+                </div>
+                <table class="table table-bordered table-responsive text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="col">Nome</th>
+                            <th class="col">Documento</th>
+                            <th class="col">E-mail</th>
+                            <th class="col" colspan="2">Visualizar/Deletar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" tabindex="-1" role="dialog"  id="adiciona_modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title" id="titulo_modal">
+                        Adicionar registro
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-container">
+                        <div class="form-row">
+                            <div class="form-group col-xl-6">
+                                <label for="nome">Nome completo:</label>
+                                <input type="text" id="nome" class="form-control" placeholder="Cliente">
+                            </div>
+                            <div class="form-group col-xl-6"> 
+                                <label for="email">E-mail:</label>
+                                <input type="email" id="email" class="form-control" placeholder="contato@nexum.com.br">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-xl-2">
+                                <label for="">Tipo Pessoa:</label>
+                                <select id="tipo_pessoa" class="form-control">
+                                    <option value="F">Fisica</option>
+                                    <option value="J">Juridica</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xl-2" id="cpf_form">
+                                <label for="cpf">CPF:</label>
+                                <input type="text" class="form-control" placeholder="XXX.XXX.XXX-XX" id="cpf">
+        
+                            </div>
+                            <div class="form-group col-xl-2 d-none" id="cnpj_form">
+                                <label for="cnpj">CNPJ:</label>
+                                <input type="text" class="form-control" placeholder="XX.XXX.XXX/XXXX-XX" id="cnpj">
+        
+                            </div>
+                            <div class="form-group col-xl-2">
+                                <label for="cep">CEP:</label>
+                                <input type="text" class="form-control" placeholder="17018-600" id="cep"> 
+                            </div>
+                            <div class="form-group col-xl-6">
+                                <label for="endereco">Endereço/Logradouro</label>
+                                <input type="text" class="form-control" id="endereco" placeholder="Rua Severino Lins" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-xl-6">
+                                <label for="bairro">Bairro:</label>
+                                <input type="text" class="form-control" id="bairro" placeholder="Vila aviação" disabled>
+                                
+                            </div>
+                            <div class="form-group col-xl-3">
+                                <label for="cidade">Cidade:</label>
+                                <input type="text" class="form-control" id="cidade" placeholder="Bauru" disabled>
+                            </div>
+                            <div class="form-group col-xl-3">
+                                <label for="uf">UF:</label>
+                                <input type="text" class="form-control" id="estado" placeholder="São Paulo" disabled>
+                            </div>
+                        </div>
+        
+                        <div class="form-row">
+                            <div class="form-group col-xl-6 col-lg-6 col-sm-6">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa-solid fa-xmark fa-lg"></i></button>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-6 col-sm-6">
+                                <button class="btn btn-success float-right "><i class="fa-solid fa-check fa-lg"></i></button>
+                            </div>
+                        </div>
+                    </form>        
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/jquery.mask.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="function.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
