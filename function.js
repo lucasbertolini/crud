@@ -67,30 +67,34 @@ function alteraTitulo(){
 //LISTANDO OS CLIENTES
 function listarClientes(data){
     let location = $('.table-responsive tbody')[0];
-        for(i=0; i<data.length; i++){
+        if(data.length >= '1'){
+            $('#coluna_padrao').remove();
+            for(i=0; i<data.length; i++){
 
-            let tr = document.createElement('tr'),
-                tipo = data[i].cpf==''?'cnpj' : 'cpf';
-            location.appendChild(tr);
-            createTd(data[i].name, tr);
-            createTd(data[i].cpf==''? data[i].cnpj : data[i].cpf, tr, tipo);
-            createTd(data[i].email, tr);
-            createTdButton(tr, data[i].id);
+                let tr = document.createElement('tr'),
+                    tipo = data[i].cpf==''?'cnpj' : 'cpf';
+                location.appendChild(tr);
+                createTd(data[i].name, tr);
+                createTd(data[i].cpf==''? data[i].cnpj : data[i].cpf, tr, tipo);
+                createTd(data[i].email, tr);
+                createTdButton(tr, data[i].id);
+            }
+    
+            $('button[action="detalhar_cliente"]').on('click',(event)=> {
+                let codigo_cliente = $(event.target).closest('button').attr('codigo_cliente');
+                detalharCliente(codigo_cliente);
+                $('#codigo_cliente').val(codigo_cliente);
+                alteraTitulo();
+                $('#adiciona_modal').modal('show');    
+            });
+                
+            $('button[action="remover_cliente"]').on('click',(event)=> {
+                let codigo_cliente = $(event.target).closest('button').attr('codigo_cliente');
+                deletaCliente(codigo_cliente);  
+                window.location.reload();    
+            });
         }
-
-        $('button[action="detalhar_cliente"]').on('click',(event)=> {
-            let codigo_cliente = $(event.target).closest('button').attr('codigo_cliente');
-            detalharCliente(codigo_cliente);
-            $('#codigo_cliente').val(codigo_cliente);
-            alteraTitulo();
-            $('#adiciona_modal').modal('show');    
-        });
-            
-        $('button[action="remover_cliente"]').on('click',(event)=> {
-            let codigo_cliente = $(event.target).closest('button').attr('codigo_cliente');
-            deletaCliente(codigo_cliente);  
-            window.location.reload();    
-        });
+       
 }
 
 //CRIANDO AS TD DA TABELA
