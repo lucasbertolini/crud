@@ -9,7 +9,8 @@ $('button[data-action="abrir_modal"]').on('click',()=>{
 });
 
 $('#form-container').on('submit',()=>{
-    let nome = $('#nome').val(),
+    let documento_validado = false,
+        nome = $('#nome').val(),
         email =  $('#email').val(),
         tipo_pessoa =$('#tipo_pessoa').val(),
         cpf =  $('#cpf').val(),
@@ -32,12 +33,23 @@ $('#form-container').on('submit',()=>{
             'cidade': cidade,
             'estado' : estado
         }
-        if(codigo_cliente == '0'){
-            adicionaCliente(conteudo);            
+        if(cpf!= ''){
+          documento_validado = validaCPF(cpf)
         }else{
-            alteraCliente(codigo_cliente,conteudo)
+            documento_validado = validaCNPJ(cnpj);
         }
-        
+    
+        if(documento_validado){
+            
+            if(codigo_cliente == '0'){
+                adicionaCliente(conteudo);            
+            }else{
+                alteraCliente(codigo_cliente,conteudo)
+            }
+        }else{
+            alert('Confirme o número do documento, número inserido inválido!');
+            return false;
+        }  
 })
 //ALTERA OS CAMPOS DE CPF OU CNPJ DEPENDENDO DO TIPO DE PESSOA SELECIONADO
 $('#tipo_pessoa').on('change',(event)=> {
@@ -45,11 +57,12 @@ $('#tipo_pessoa').on('change',(event)=> {
         case 'J':
             $('#cnpj_form').removeClass('d-none');
             $('#cpf_form').addClass('d-none');
+            $('#cpf').val('');
             break;
         case 'F':
             $('#cpf_form').removeClass('d-none');
             $('#cnpj_form').addClass('d-none');
-            
+            $('#cnpj').val('');
         break;
     }
 });
