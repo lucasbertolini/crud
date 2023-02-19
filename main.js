@@ -53,7 +53,7 @@ $('#form-container').on('submit',()=>{
 })
 //ALTERA OS CAMPOS DE CPF OU CNPJ DEPENDENDO DO TIPO DE PESSOA SELECIONADO
 $('#tipo_pessoa').on('change',(event)=> {
-    switch(event.target.value){
+    switch($(event.target).val()){
         case 'J':
             $('#cnpj_form').removeClass('d-none');
             $('#cpf_form').addClass('d-none');
@@ -75,12 +75,18 @@ $('#cep').on('change',(event)=> {
         fetch(`https://viacep.com.br/ws/${cep}/json/`)
             .then((response)=>response.json())
             .then((data)=>{
+                if(data.erro){
+                    alert('CEP inválido!');
+                    return false;
+                }
                 $('#endereco').val(data.logradouro);
                 $('#cidade').val(data.localidade);
                 $('#estado').val(data.uf);
                 $('#bairro').val(data.bairro);
-            }
-        )
+            })
+    }else{
+        alert('CEP inválido!');
+        return false;
     }
 });
 
